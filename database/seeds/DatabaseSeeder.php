@@ -22,5 +22,7 @@ class DatabaseSeeder extends Seeder
         factory(App\Admin::class)->create(
             ['username' => 'taro', 'password' => bcrypt('jiro')]
         );
+
+        factory(App\Message::class, 20)->create();
     }
 }
