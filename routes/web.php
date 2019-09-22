@@ -41,6 +41,10 @@ Route::prefix('admin')->namespace('Admin')->as('admin.')->group(function () {
         Route::post('message/create', 'MessageController@store');
         Route::get('message/edit/{message}', 'MessageController@edit')->name('message.edit'); // モデル・ルート・バインディング
         Route::post('message/edit/{message}', 'MessageController@update'); // モデル・ルート・バインディング
+
+        // ユーザー管理
+        Route::get('user', 'UserController@index')->name('user.index');
+        Route::delete('user/destroy/{user}', 'UserController@destroy')->name('user.destroy');
     });
 
 });

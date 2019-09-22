@@ -28,6 +28,18 @@ class User extends Authenticatable
     ];
 
     /**
+     * Boot
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function($user) {
+            $user->messages()->delete();
+        });
+    }
+
+    /**
      * A user has many messages
      */
     public function messages()
