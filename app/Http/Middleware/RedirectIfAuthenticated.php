@@ -18,7 +18,10 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next, $guard = null)
     {
         if (Auth::guard($guard)->check()) {
-            return redirect('/home');
+            // 認証区分がある場合は、その名称（「admin」「guest」）＋ '.top'をルート名とするURLにリダイレクトする
+            // 認証区分の指定がない時（デフォルト時）は、'/' にリダイレクトさせている
+            $route = ($guard) ? $guard.'.top' : '/';
+            return redirect()->route($route);
         }
 
         return $next($request);
